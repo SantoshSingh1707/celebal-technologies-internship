@@ -1,0 +1,7 @@
+
+# Week 6 dataset
+Week 6/mnist_data/
+
+# Trained models
+*.keras
+*.h5
