@@ -1,0 +1,43 @@
+ACME CORPORATION EMPLOYEE HANDBOOK
+(Replace or add your own PDFs/text files to this folder and re-run the ingest step.)
+
+Welcome to Acme Corporation. This handbook summarizes the key policies every employee
+should know. It is a sample document so you can see the RAG pipeline working end-to-end.
+For your own project, drop your resume, notes, research papers, or books here instead.
+
+WORK HOURS
+The standard work week is Monday through Friday, 9:00 AM to 6:00 PM, with a one-hour
+lunch break. Flexible hours are available with manager approval, but every employee must
+be reachable between 10:00 AM and 4:00 PM core hours. Employees may work from home up to
+two days per week after completing their probation period.
+
+LEAVE POLICY
+Every full-time employee earns 24 paid leave days per year, in addition to 10 public
+holidays. Sick leave is separate and does not reduce annual leave. To request leave,
+submit a request through the HR portal at least three working days in advance for planned
+leave, or on the same day for emergencies. Leave can be carried forward to the next
+calendar year up to a maximum of 10 days.
+
+HEALTH AND INSURANCE
+Acme provides comprehensive health insurance to all employees and their dependents from
+the first day of employment. The policy covers outpatient care, hospitalization, dental,
+and vision. Preventive check-ups are fully covered once a year. A wellness allowance of
+$500 per year can be reimbursed for gym memberships, sports equipment, or health apps.
+
+PROBATION AND REVIEWS
+New employees complete a probation period of six months. During probation, performance
+is reviewed at the third month and at the end of the period. After probation, all
+employees have a formal performance review every six months. Promotions and salary
+revisions are linked to these review outcomes.
+
+CONFIDENTIALITY AND INTELLECTUAL PROPERTY
+Employees must keep company information confidential both during and after employment.
+All work produced during employment, including code, documents, and designs, is the sole
+property of Acme Corporation. Using company resources for personal commercial projects is
+not permitted without written approval from the legal team.
+
+TRAINING AND DEVELOPMENT
+Acme reimburses up to $1,000 per year for approved training courses, certifications, and
+conference tickets. Employees are encouraged to spend up to four hours per week during
+work hours on learning new skills relevant to their role. Paid study leave of up to five
+days per year is available for certification exams.
