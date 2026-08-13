@@ -1,19 +1,4 @@
-"""A Byte-Pair Encoding (BPE) tokenizer implemented from scratch.
-
-This is a mini version of GPT-2's tokenizer, following the same algorithm as
-Karpathy's minbpe RegexTokenizer:
-  1. Pre-tokenize text with a regex that keeps words/numbers/whitespace together.
-  2. Treat each UTF-8 byte as an initial token (so any unicode works).
-  3. Repeatedly merge the most frequent adjacent byte-pair until we reach
-     ``vocab_size`` tokens.
-  4. encode()/decode() round-trips between text and token ids.
-
-The stats/merge loops are vectorized with numpy (same trick as minbpe's
-``_train_with_numpy``) so training on a 1MB corpus takes seconds instead of
-minutes, while the *algorithm* remains exactly the classic BPE procedure.
-Because it works on raw bytes, the same tokenizer works for English, Hindi,
-and any other language without changes.
-"""
+"""Byte-Pair Encoding tokenizer from scratch (works on any language)."""
 from __future__ import annotations
 
 import json

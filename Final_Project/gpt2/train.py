@@ -1,6 +1,4 @@
-"""Training loop: AdamW, weight decay, cosine LR schedule with warmup,
-gradient clipping, periodic validation, checkpointing.
-"""
+"""Training loop: AdamW, LR schedule, validation, checkpointing."""
 from __future__ import annotations
 
 import json
@@ -29,7 +27,7 @@ def lr_schedule(step: int, cfg: TrainConfig) -> float:
 
 
 def build_optimizer(cfg: TrainConfig):
-    """AdamW: separate weight decay for 2D (linear) params, as in GPT-2."""
+    """AdamW with decoupled weight decay."""
     opt = tf.keras.optimizers.AdamW(
         learning_rate=cfg.learning_rate,
         weight_decay=cfg.weight_decay,

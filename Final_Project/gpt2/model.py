@@ -1,15 +1,4 @@
-"""A mini GPT-2 style decoder-only transformer, implemented from scratch in
-TensorFlow.
-
-This mirrors the architecture of Karpathy's nanoGPT / OpenAI's GPT-2:
-  - token + learned position embeddings
-  - N transformer blocks of [causal multi-head self-attention -> MLP]
-  - pre-norm LayerNorm with residual connections
-  - weight-tied output projection (embedding head == token embedding)
-
-It is written as plain TensorFlow ops (no Keras layers) so every step of the
-forward pass is explicit and educational.
-"""
+"""Mini GPT-2 decoder-only transformer in plain TensorFlow ops."""
 from __future__ import annotations
 
 import tensorflow as tf
@@ -43,12 +32,7 @@ class LayerNorm:
 
 
 class CausalSelfAttention:
-    """Multi-head causal self-attention with optional Grouped-Query Attention.
-
-    Head dim = n_embd // n_head. When gqa_num_kv_heads > 0, key/value tensors
-    are shared across groups of query heads (a memory-saving architectural
-    variant used by Llama-2 / Mistral).
-    """
+    """Causal multi-head attention; optional GQA shares K/V heads."""
 
     def __init__(self, config: ModelConfig, name: str = "attn"):
         self.config = config
@@ -65,7 +49,7 @@ class CausalSelfAttention:
             tf.random.normal([d, 3 * d], stddev=0.02), trainable=True, name=f"{name}/c_attn"
         )
         self.c_attn_kv = None
-        if config.gqa_num_kv_heads > 0:  # only when using grouped-query attention
+        if config.gqa_num_kv_heads > 0:  # GQA path
             kv_dim = n_kv * head_dim
             self.c_attn_kv = tf.Variable(
                 tf.random.normal([d, 2 * kv_dim], stddev=0.02), trainable=True,
@@ -83,7 +67,7 @@ class CausalSelfAttention:
         if self.config.n_kv_heads == self.config.n_head:  # full MHA
             qkv = tf.matmul(x, self.c_attn)
             q, k, v = tf.split(qkv, 3, axis=-1)
-        else:  # GQA: broadcast shared k/v heads across query head groups
+        else:  # GQA: broadcast shared K/V heads
             qkv = tf.matmul(x, self.c_attn)
             q, _, _ = tf.split(qkv, 3, axis=-1)
             kv = tf.matmul(x, self.c_attn_kv)

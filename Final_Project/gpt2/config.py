@@ -1,8 +1,4 @@
-"""Configuration dataclasses for the mini GPT-2 style model.
-
-ModelConfig mirrors nanoGPT's Config and lets us define everything from a
-~1M parameter "mini" model up to the full 127M GPT-2 configuration.
-"""
+"""Configuration dataclasses: ModelConfig, TrainConfig, DataConfig."""
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -16,7 +12,7 @@ class ModelConfig:
     n_head: int = 4                # number of attention heads
     n_embd: int = 128              # embedding / hidden dimension
     dropout: float = 0.1           # dropout probability (0 = off)
-    bias: bool = False             # layer norms / projections use bias? (GPT-2 uses bias)
+    bias: bool = False             # layernorm/projections use bias?
     gqa_num_kv_heads: int = 0      # >0 enables Grouped-Query Attention (bonus)
 
     def __post_init__(self) -> None:
@@ -25,7 +21,7 @@ class ModelConfig:
 
     @property
     def n_kv_heads(self) -> int:
-        """Key/value heads: one per head (MHA) or grouped (GQA)."""
+        """K/V heads: per-head (MHA) or grouped (GQA)."""
         return self.gqa_num_kv_heads or self.n_head
 
     def param_count(self) -> int:

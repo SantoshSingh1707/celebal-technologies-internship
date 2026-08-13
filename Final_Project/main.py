@@ -1,11 +1,4 @@
-"""CLI for the mini GPT-2 from scratch project.
-
-Commands:
-  prepare   download / show corpus stats and train the BPE tokenizer
-  train     train the mini model on a corpus (english or hindi)
-  generate  sample text from a trained checkpoint
-  chat      interactive continuation of a prompt
-"""
+"""CLI: prepare / train / generate / chat."""
 from __future__ import annotations
 
 import argparse
