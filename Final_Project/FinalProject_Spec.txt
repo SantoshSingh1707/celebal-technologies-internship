@@ -1,0 +1,78 @@
+Mini GPT-2 Style Language Model From Scratch (TensorFlow)
+Dataset:
+* English: tiny shakespeare (public domain) - the classic Karpathy corpus
+* Bonus: Hindi discourse corpus (11 public-domain Hindi authors) - non-English data
+
+Overview
+This project builds and trains a mini version (parameters reduced accordingly) of a
+GPT-2-style language model entirely from scratch, inspired by the educational content
+of Andrej Karpathy. The objective is a deep, hands-on understanding of transformer
+architectures - tokenization, self-attention, and sequence modeling - by implementing
+a decoder-only model and training it on a text dataset to generate coherent language.
+The project is intentionally open-ended to encourage creativity and independent
+thinking.
+________________
+Objectives
+* Implement a decoder-only transformer (GPT-2 style) from scratch in TensorFlow
+* Understand tokenization by building a Byte-Pair Encoding (BPE) tokenizer from scratch
+* Understand causal (masked) self-attention and multi-head attention mechanics
+* Train a mini language model to minimize cross-entropy loss on a text corpus
+* Generate coherent, multi-sentence text via autoregressive sampling
+* Go beyond the basics (bonus): non-English data, custom attention, scaling options
+________________
+Key Concepts
+1. Tokenization
+Raw text is converted into a vocabulary of sub-word tokens using Byte-Pair Encoding.
+The tokenizer is trained on the corpus itself and exposes encode()/decode().
+2. Self-Attention
+Each token attends to every other token in its context window. Causal masking ensures
+a token can only attend to itself and earlier tokens (decoder-only).
+3. Multi-Head Attention
+Multiple attention heads run in parallel, letting the model jointly attend to
+information from different representation subspaces.
+4. Residual Connections & LayerNorm
+Transformer blocks wrap attention and MLP with pre-norm LayerNorm + residual skips,
+enabling stable training of deeper stacks.
+5. Autoregressive Generation
+The model predicts the next token distribution; sampling with temperature/top-k
+produces new text one token at a time.
+________________
+System Architecture
+   1. Data Preparation
+     Download/save a plain-text corpus (English + Hindi).
+   2. Tokenizer Training
+     Train a BPE tokenizer from scratch on the corpus (vocab, merges, byte encoding).
+   3. Encoded Dataset
+     Tokenize the corpus into a long integer tensor; build batches of (x, y) pairs.
+   4. Model Definition
+     Implement GPT-2 decoder-only: token+position embeddings, N transformer blocks
+     (causal multi-head attention + MLP), final layernorm, lm head.
+   5. Training Loop
+     AdamW with weight decay, cosine LR schedule with warmup, gradient clipping,
+     evaluate train/val loss periodically.
+   6. Text Generation
+     Sample from the trained model (temperature + top-k) starting from a prompt.
+________________
+Model Configurations (parameter count)
+* mini (default)      - ~1M params   : fast CPU training, demonstrates the full pipeline
+* small (gpt2)        - ~124M params : the "full GPT-2" scale-up bonus config
+The mini config reduces n_layer/n_head/n_embd/vocab/block_size accordingly.
+________________
+Bonus Work (beyond the basics)
+* Non-English data    - train the same pipeline on a Hindi corpus
+* Custom attention    - Grouped-Query Attention (GQA) flag in the model
+* Scaling up          - config included for the full 127M GPT-2 configuration
+________________
+Key Learnings
+* How a full GPT-2-style model is assembled from first principles in TensorFlow
+* The role of BPE in giving sub-word granularity + handling unseen words
+* How causal self-attention with learned position embeddings models sequences
+* Practical training details: LR schedule, weight decay, gradient clipping
+* The dramatic effect of data scale/language on the generated output
+________________
+Conclusion
+This project demonstrates a complete, from-scratch implementation of a decoder-only
+transformer - from tokenizer to trained model to text generation - running on a
+laptop CPU, and shows how the same machinery generalizes to new languages and
+architectural variants.
+________________

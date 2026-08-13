@@ -1,0 +1,5 @@
+tensorflow>=2.15
+numpy>=1.24
+matplotlib>=3.7
+tqdm>=4.60
+regex>=2023.6
